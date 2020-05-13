@@ -8,111 +8,119 @@
  *
  * @author ASUS
  */
-import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
-import javax.swing.*;
-import java.io.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.Random;
 
 public class ramalan extends javax.swing.JFrame {
 
     /**
      * Creates new form ramalan
      */
-    private class ItemHandler implements ItemListener{
-        
+
+    /**class handler*/
+    private class ItemHandler implements ItemListener{    
         @Override
         public void itemStateChanged(ItemEvent event){
-            if(event.getSource()== comboBulan){
-                int bulan2 = Integer.parseInt(comboBulan.getSelectedItem().toString());
+            if(comboBulan.getSelectedItem().equals("2")){
+                comboHari.removeItem("30");
+                comboHari.removeItem("31");
             }
-            if(event.getSource()== comboHari){
-                int hari2 = Integer.parseInt(comboHari.getSelectedItem().toString());
+            else{
+                comboHari.removeAllItems();
+                for(int i=0; i<32; i++){
+                    String a = Integer.toString(i);
+                    comboHari.addItem(a);
+                }
             }
         }
-    }
-    private static void zodiac(int hari2, int bulan2){
+    }   
+
+    /** method zodiac*/
+    private static String zodiac(int hari2, int bulan2){
         String astro = "";
         if (bulan2 == 12){ 
             if (hari2 < 22) 
-            astro = "sagittarius"; 
+            astro = "Sagittarius"; 
             else
-            astro ="capricorn"; 
+            astro ="Capricorn"; 
         }      
         else if (bulan2 == 1){ 
             if (hari2 < 20) 
-            astro = "capricorn"; 
+            astro = "Capricorn"; 
             else
-            astro = "aquarius"; 
+            astro = "Aquarius"; 
         }     
         else if (bulan2 == 2){ 
             if (hari2 < 19) 
-            astro = "aquarius"; 
+            astro = "Aquarius"; 
             else
-            astro = "pisces"; 
+            astro = "Pisces"; 
         }     
         else if(bulan2 == 3){ 
             if (hari2 < 21)  
-            astro = "pisces"; 
+            astro = "Pisces"; 
             else
-            astro = "aries"; 
+            astro = "Aries"; 
         } 
         else if (bulan2 == 4){ 
             if (hari2 < 20) 
-            astro = "aries"; 
+            astro = "Aries"; 
             else
-            astro = "taurus"; 
+            astro = "Taurus"; 
         }     
         else if (bulan2 == 5){ 
             if (hari2 < 21) 
-            astro = "taurus"; 
+            astro = "Taurus"; 
             else
-            astro = "gemini"; 
+            astro = "Gemini"; 
         }     
         else if(bulan2 == 6){ 
             if (hari2 < 21) 
-            astro = "gemini"; 
+            astro = "Gemini"; 
             else
-            astro = "cancer"; 
+            astro = "Cancer"; 
         }      
         else if (bulan2 == 7){ 
             if (hari2 < 23) 
-            astro = "cancer"; 
+            astro = "Cancer"; 
             else
-            astro = "leo"; 
+            astro = "Leo"; 
         }     
         else if(bulan2 == 8){ 
             if (hari2 < 23)  
-            astro = "leo"; 
+            astro = "Leo"; 
             else
-            astro = "virgo"; 
+            astro = "Virgo"; 
         }     
         else if (bulan2 == 9){ 
             if (hari2 < 23) 
-            astro = "virgo"; 
+            astro = "Virgo"; 
             else
-            astro = "libra"; 
+            astro = "Libra"; 
         }     
         else if (bulan2 == 10){ 
             if (hari2 < 23) 
-            astro = "libra"; 
+            astro = "Libra"; 
             else
-            astro = "scorpio"; 
+            astro = "Scorpio"; 
         }     
         else if (bulan2 == 11){ 
             if (hari2 < 22) 
-            astro = "scorpio"; 
+            astro = "Scorpio"; 
             else
-            astro = "sagittarius"; 
-        } 
-        System.out.println(astro);
+            astro = "Sagittarius"; 
+        }
+        return astro;
     }
+    
+    private ItemHandler handler = new ItemHandler();
     
     public ramalan() {
         initComponents();
         jTextArea1.setEditable(false);
+        comboBulan.addItemListener(handler);
     }
 
     /**
@@ -132,8 +140,6 @@ public class ramalan extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        lbzodiak = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         lbHasil = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -143,8 +149,10 @@ public class ramalan extends javax.swing.JFrame {
         setBackground(new java.awt.Color(153, 0, 255));
         setForeground(new java.awt.Color(204, 0, 204));
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Nama :");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("Bulan lahir :");
 
         comboBulan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
@@ -152,6 +160,9 @@ public class ramalan extends javax.swing.JFrame {
 
         comboHari.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 
+        nama.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("Enter");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,6 +170,7 @@ public class ramalan extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton2.setText("Clear");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,15 +178,14 @@ public class ramalan extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Ramalan hari ini :");
 
-        jLabel4.setText("Bintang :");
-
-        lbzodiak.setText("_____");
-
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setText("Tanggal lahir :");
 
         lbHasil.setBackground(new java.awt.Color(0, 255, 153));
+        lbHasil.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lbHasil.setToolTipText("");
 
         jTextArea1.setColumns(20);
@@ -207,23 +218,17 @@ public class ramalan extends javax.swing.JFrame {
                                             .addComponent(nama, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(comboBulan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                                                 .addComponent(jLabel5)))))
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(comboHari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(81, 81, 81)
-                                        .addComponent(jButton1))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addGap(53, 53, 53)
-                                        .addComponent(lbzodiak)))))
+                                .addComponent(comboHari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(81, 81, 81)
+                                .addComponent(jButton1)))
                         .addGap(36, 36, 36))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2)
-                .addGap(256, 256, 256))
+                .addGap(288, 288, 288))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,14 +245,11 @@ public class ramalan extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(lbzodiak))
+                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbHasil, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
                 .addContainerGap())
@@ -260,7 +262,8 @@ public class ramalan extends javax.swing.JFrame {
         String nama2 = nama.getText();
         nama.setText(nama2);
         
-        
+        int bulan1 = Integer.parseInt(comboBulan.getSelectedItem().toString());
+        int hari1 = Integer.parseInt(comboHari.getSelectedItem().toString());
         
         int index = (int)(Math.random()*4);
         int index1 = (int)(Math.random()*4);
@@ -269,13 +272,15 @@ public class ramalan extends javax.swing.JFrame {
             {"Kesehatan : Terbaik", "Kesehatan : Baik", "Kesehatan : kurang baik", "Kesehatan : buruk"},
             {"Jodoh : Terbaik", "Jodoh : Baik", "Jodoh : kurang baik", "Jodoh : buruk"}};
         
-        if(nama2.equals("")){ 
+        if(nama2.equals("") || bulan1 == 0 || hari1 == 0){ 
             JOptionPane.showMessageDialog(this, "Silahkan isi tanggal lahir dan nama");
         }
         else{
-            lbzodiak.setText("");
-            lbHasil.setText(nama2 + ", ");
-            jTextArea1.setText(luck[0][index] +'\n'+ luck[1][index1] +'\n'+ luck[2][index2]);
+            String jadi = zodiac(hari1, bulan1);
+            
+            lbHasil.setText(nama2 + ", zodiak anda " + jadi);
+            jTextArea1.setText(luck[0][index] +'\n'+ luck[1][index1] +'\n'+ luck[2][index2]
+            +'\n'+ "\nSemoga hari anda menyenangkan.");
             jButton1.setEnabled(false);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -284,7 +289,6 @@ public class ramalan extends javax.swing.JFrame {
         nama.setText("");
         comboBulan.setSelectedItem("0");
         comboHari.setSelectedItem("0");
-        lbzodiak.setText("_____");
         lbHasil.setText("");
         jTextArea1.setText("");
         jButton1.setEnabled(true);
@@ -333,12 +337,10 @@ public class ramalan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lbHasil;
-    private javax.swing.JLabel lbzodiak;
     private javax.swing.JTextField nama;
     // End of variables declaration//GEN-END:variables
 }
