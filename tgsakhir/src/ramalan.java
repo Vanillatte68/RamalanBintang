@@ -278,7 +278,7 @@ public class ramalan extends javax.swing.JFrame {
         else{
             String jadi = zodiac(hari1, bulan1);
             
-            lbHasil.setText(nama2 + ", zodiak anda " + jadi);
+            lbHasil.setText(nama2 + ", zodiak anda " + jadi + ". Peluang nasib anda :");
             jTextArea1.setText(luck[0][index] +'\n'+ luck[1][index1] +'\n'+ luck[2][index2]
             +'\n'+ "\nSemoga hari anda menyenangkan.");
             jButton1.setEnabled(false);
